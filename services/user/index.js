@@ -10,7 +10,7 @@ var userSvc = {}
 // @route   POST /api/user/login
 // @access  Public
 userSvc.registerUser = asyncHandler(async (req, res, next) => {
-  const { name, email, password } = req.body
+  const { name, email, password, role } = req.body
   console.log(name, email, password)
 
   if (!name || !email || !password) {
@@ -32,6 +32,7 @@ userSvc.registerUser = asyncHandler(async (req, res, next) => {
 
   const { error } = requiredCredFormat.validate(req.body)
   if (error) {
+    res.status(400)
     return next(error)
   }
 
@@ -52,6 +53,7 @@ userSvc.registerUser = asyncHandler(async (req, res, next) => {
     name,
     email,
     password: hashedPassword,
+    role
   })
 
   if (user) {
@@ -59,6 +61,7 @@ userSvc.registerUser = asyncHandler(async (req, res, next) => {
       _id: user.id,
       name: user.name,
       email: user.email,
+      role: user.role,
       token: generateToken(user._id),
     })
   } else {
