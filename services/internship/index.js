@@ -17,8 +17,6 @@ internshipSvc.getInternships = asyncHandler(async (req, res) => {
       }
     : {};
 
-    console.log({...keyword})
-
   const internships = await Internship.find({ ...keyword });
   res.status(200).json(internships)
 })
@@ -89,7 +87,7 @@ internshipSvc.deleteInternship = asyncHandler(async (req, res) => {
 
   if (internship) {
     await internship.deleteOne();
-    res.status(200).send("Delete Successfully");
+    res.status(200).json({ id: req.params.id })
   } else {
     res.status(404);
     throw new Error("Internship not found");
