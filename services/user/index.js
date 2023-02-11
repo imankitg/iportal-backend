@@ -11,7 +11,6 @@ var userSvc = {}
 // @access  Public
 userSvc.registerUser = asyncHandler(async (req, res, next) => {
   const { name, email, password, role } = req.body
-  console.log(name, email, password)
 
   if (!name || !email || !password) {
     res.status(400)
