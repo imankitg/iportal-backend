@@ -9,10 +9,6 @@ const port = process.env.PORT || 3000
 
 connectDB()
 const app = express()
-var corsOptions = {
-  origin: 'http://localhost:8080',
-  optionsSuccessStatus: 200 // For legacy browser support
-}
 app.use(cors({
   origin: "*",
   credentials: true
