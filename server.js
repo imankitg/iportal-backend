@@ -9,7 +9,14 @@ const port = process.env.PORT || 3000
 
 connectDB()
 const app = express()
-app.use(cors());
+var corsOptions = {
+  origin: 'http://localhost:8080',
+  optionsSuccessStatus: 200 // For legacy browser support
+}
+app.use(cors({
+  origin: "*",
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
